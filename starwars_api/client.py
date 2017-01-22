@@ -1,4 +1,3 @@
-
 import json
 
 try:
@@ -9,9 +8,11 @@ except ImportError:
     from urllib.parse import urlunsplit, urlsplit, urlencode
 import requests
 
-from starwars_api import settings
-from starwars_api.exceptions import SWAPIClientError
-
+try:
+    from starwars_api import settings
+    from starwars_api.exceptions import SWAPIClientError
+except:
+    import settings, exceptions
 
 class SWAPIClient(object):
     GET_TIMEOUT = 30

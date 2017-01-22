@@ -7,6 +7,15 @@ test:
 	@echo $(TAG)Running tests$(END)
 	PYTHONPATH=. py.test -s tests
 
+test-client:
+	@echo $(TAG)Running tests$(END)
+	PYTHONPATH=. py.test -s tests/test_client.py
+	
+test-models:
+	@echo $(TAG)Running tests$(END)
+	PYTHONPATH=. py.test -s tests/test_models.py
+
+
 test-cov:
 	@echo $(TAG)Running tests with coverage$(END)
 	PYTHONPATH=. py.test --cov=starwars_api tests

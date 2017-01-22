@@ -5,6 +5,7 @@ from starwars_api.exceptions import SWAPIClientError
 from starwars_api.models import *
 
 
+
 class PeopleTestCase(BaseStarWarsAPITestCase):
 
     @responses.activate
@@ -46,3 +47,5 @@ class PeopleQuerySetTestCase(BaseStarWarsAPITestCase):
     def test_people_qs_count(self):
         qs = People.all()
         self.assertEqual(qs.count(), 15)
+        
+    # Create Films tests?
