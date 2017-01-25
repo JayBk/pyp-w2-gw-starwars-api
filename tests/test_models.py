@@ -71,7 +71,7 @@ class FilmsTestCase(BaseStarWarsAPITestCase):
 class FilmsQuerySetTestCase(BaseStarWarsAPITestCase):
 
     @responses.activate
-    def test_people_qs_next(self):
+    def test_films_qs_next(self):
         qs = Films.all()
         obj = qs.next()
         self.assertTrue(isinstance(obj, Films))
