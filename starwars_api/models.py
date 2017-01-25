@@ -101,7 +101,7 @@ class BaseQuerySet(object):
         a new request is performed to the API in order to get it.
         """
         # literally just have to do EXACTLY what it says above^^^...
-        if not self.for_count:  #  If the counter is not persisted as a QuerySet instance attr,
+        if self.for_count is None:  #  If the counter is not persisted as a QuerySet instance attr,
             self.get_next_page()  # a new request is performed to the API in order to get it.
         return self.for_count  #  Returns the total count of objects of current model.
         # or we can do: return len([item for item in self])
