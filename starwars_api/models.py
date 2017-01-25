@@ -86,7 +86,7 @@ class BaseQuerySet(object):
         next_page = 'get_{}'.format(self.RESOURCE_NAME)
         json_data = getattr(api_client, next_page)(page=self.page)
         self.no_inst_results = json_data['results']
-        # self.for_count = json_data['count']  # We can use this For the count() function or use return len([item for item in self])
+        self.for_count = json_data['count']  # We can use this For the count() function or use return len([item for item in self])
         make_obj  = eval(self.RESOURCE_NAME.title())  # Easiest way is to use the RESOURCE_NAME and make the first letter capital which will make it People() or Films(), 
         for data in json_data['results']:           # Here we iterate through json_data['results'] taking each entry and appending it to a list, and while we do that, we instantiate it so that
             inst_data = make_obj(data)          # This is what I meant when we first started to save 
@@ -100,12 +100,11 @@ class BaseQuerySet(object):
         If the counter is not persisted as a QuerySet instance attr,
         a new request is performed to the API in order to get it.
         """
-        # When count is called it is the PeopleQuerySet class?
         # literally just have to do EXACTLY what it says above^^^...
-        # if not self.for_count:  #  If the counter is not persisted as a QuerySet instance attr,
-        #     self.get_next_page()  # a new request is performed to the API in order to get it.
-        # return self.for_count  #  Returns the total count of objects of current model.
-        return len([item for item in self])
+        if not self.for_count:  #  If the counter is not persisted as a QuerySet instance attr,
+            self.get_next_page()  # a new request is performed to the API in order to get it.
+        return self.for_count  #  Returns the total count of objects of current model.
+        # or we can do: return len([item for item in self])
 
 
 class PeopleQuerySet(BaseQuerySet):
